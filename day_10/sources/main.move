@@ -34,18 +34,20 @@ module challenge::day_10 {
         task.status == TaskStatus::Open
     }
 
-    // TODO: Write a public function 'complete_task' that:
-    // - Takes task: &mut Task
-    // - Sets task.status = TaskStatus::Completed
-    // This should be public so users can call it
-    // public fun complete_task(task: &mut Task) {
-    //     // Your code here
-    // }
+    // Public function to complete a task
+    public fun complete_task(task: &mut Task) {
+        task.status = TaskStatus::Completed;
+    }
 
-    // TODO: (Optional) Write a private helper function
-    // Private functions use 'fun' instead of 'public fun'
-    // They can only be called from within the same module
-    // BONUS: Add a public function that calls your private helper
-    //        (e.g. 'has_valid_reward' that internally calls 'internal_helper')
+    // Private helper function - can only be called from within this module
+    fun internal_helper(task: &Task): bool {
+        // Internal validation logic
+        task.reward > 0
+    }
+
+    // Public function that calls the private internal_helper
+    public fun has_valid_reward(task: &Task): bool {
+        internal_helper(task)
+    }
 }
 
